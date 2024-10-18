@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain.Entities
+namespace CarBook.Application.Features.CQRS.Commands.CategoryCommands
 {
-    public class Category
+    public class CreateCategoryCommand
     {
-        public int CategoryID { get; set; }
         public string Name { get; set; }
     }
 }

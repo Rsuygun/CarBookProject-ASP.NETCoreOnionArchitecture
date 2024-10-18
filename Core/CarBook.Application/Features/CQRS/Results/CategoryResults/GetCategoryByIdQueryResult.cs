@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain.Entities
+namespace CarBook.Application.Features.CQRS.Results.CategoryResults
 {
-    public class Category
+    public class GetCategoryByIdQueryResult
     {
         public int CategoryID { get; set; }
         public string Name { get; set; }

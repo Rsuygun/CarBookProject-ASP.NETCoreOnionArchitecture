@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CarBook.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain.Entities
+namespace CarBook.Application.Features.CQRS.Commands.BrandCommands
 {
-    public class Category
+    public class CreateBrandCommand
     {
-        public int CategoryID { get; set; }
         public string Name { get; set; }
     }
 }
