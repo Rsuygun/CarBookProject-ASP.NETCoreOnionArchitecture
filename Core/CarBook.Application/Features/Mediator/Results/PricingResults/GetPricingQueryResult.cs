@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain.Entities
+namespace CarBook.Application.Features.Mediator.Results.PricingResults
 {
-    public class Location
+    public class GetPricingQueryResult
     {
-        public int LocationID { get; set; }
+        public int PricingID { get; set; }
         public string Name { get; set; }
     }
 }

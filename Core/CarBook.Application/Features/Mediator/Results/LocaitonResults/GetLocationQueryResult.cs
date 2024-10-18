@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarBook.Domain.Entities
+namespace CarBook.Application.Features.Mediator.Results.LocaitonResults
 {
-    public class Location
+    public class GetLocationQueryResult
     {
         public int LocationID { get; set; }
         public string Name { get; set; }
