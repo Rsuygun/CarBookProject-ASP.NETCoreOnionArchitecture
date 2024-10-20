@@ -1,10 +1,8 @@
-﻿using CarBook.Dto.ServiceDtos;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.WebUI.Controllers
 {
-    public class ServiceController : Controller
+    public class DefaultController : Controller
     {
         public IActionResult Index()
         {
