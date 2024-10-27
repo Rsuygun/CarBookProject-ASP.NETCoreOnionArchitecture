@@ -1,4 +1,4 @@
-﻿using CarBook.Dto.AboutDtos;
+﻿using CarBook.Dto.ServiceDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -6,12 +6,12 @@ using System.Text;
 namespace CarBook.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("Admin/AdminAbout")]
-    public class AdminAboutController : Controller
+    [Route("Admin/AdminService")]
+    public class AdminServiceController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public AdminAboutController(IHttpClientFactory httpClientFactory)
+        public AdminServiceController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -20,43 +20,43 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7190/api/Abouts");
+            var responseMessage = await client.GetAsync("https://localhost:7190/api/Services");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultServiceDto>>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpGet]
-        [Route("CreateAbout")]
-        public IActionResult CreateAbout()
+        [Route("CreateService")]
+        public IActionResult CreateService()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("CreateAbout")]
-        public async Task<IActionResult> CreateAbout(CreateAboutDto createAboutDto)
+        [Route("CreateService")]
+        public async Task<IActionResult> CreateService(CreateServiceDto createServiceDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createAboutDto);
+            var jsonData = JsonConvert.SerializeObject(createServiceDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7190/api/Abouts", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7190/api/Services", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "AdminAbout", new { area = "Admin" });
+                return RedirectToAction("Index", "AdminService", new { area = "Admin" });
             }
             return View();
         }
 
-        [Route("RemoveAbout/{id}")]
-        public async Task<IActionResult> RemoveAbout(int id)
+        [Route("RemoveService/{id}")]
+        public async Task<IActionResult> RemoveService(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7190/api/Abouts?id=" + id);
+            var responseMessage = await client.DeleteAsync($"https://localhost:7190/api/Services?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -65,31 +65,31 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("UpdateAbout/{id}")]
-        public async Task<IActionResult> UpdateAbout(int id)
+        [Route("UpdateService/{id}")]
+        public async Task<IActionResult> UpdateService(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7190/api/Abouts/{id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7190/api/Services/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateAboutDto>(jsonData);
+                var values = JsonConvert.DeserializeObject<UpdateServiceDto>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpPost]
-        [Route("UpdateAbout/{id}")]
-        public async Task<IActionResult> UpdateAbout(UpdateAboutDto updateAboutDto)
+        [Route("UpdateService/{id}")]
+        public async Task<IActionResult> UpdateService(UpdateServiceDto updateServiceDto)
         {
             var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(updateAboutDto);
+            var jsonData = JsonConvert.SerializeObject(updateServiceDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7190/api/Abouts/", stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:7190/api/Services/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "AdminAbout", new { area = "Admin" });
+                return RedirectToAction("Index", "AdminService", new { area = "Admin" });
             }
             return View();
         }
