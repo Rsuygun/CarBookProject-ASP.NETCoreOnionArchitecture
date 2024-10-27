@@ -51,5 +51,12 @@ namespace CarBook.WebApi.Controllers
             _repository.Update(comment);
             return Ok("Yorum Başarıyla Güncellendi");
         }
+
+        [HttpGet("CommentListByBlog")]
+        public IActionResult CommentListByBlog(int id)
+        {
+            var values = _repository.GetCommentByBlogId(id);
+            return Ok(values);
+        }
     }
 }
